@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to it</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #fdf6f7 0%, #e0f2fe 100%);
+      min-height: 100vh;
+    }
+    .transition-all { transition: all 0.45s cubic-bezier(.7,.25,.5,1.12);}
+    .welcome-hide { opacity: 0; transform: translateY(-24px); pointer-events: none;}
+    .welcome-show { opacity: 1; transform: translateY(0); pointer-events: auto;}
+    .pop { animation: pop-center 0.36s;}
+    @keyframes pop-center {
+      0% { transform: scale(1);}
+      60% { transform: scale(1.13);}
+      100% { transform: scale(1);}
+    }
+    .mini-heart {
+      position: absolute;
+      width: 25px; height: 25px;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%) scale(0.75);
+      opacity: 0;
+      z-index: 20;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 6px rgba(180,120,255,0.11));
+      transition:
+        opacity 0.38s cubic-bezier(.8,.2,.3,1),
+        transform 0.42s cubic-bezier(.8,.2,.3,1);
+    }
+    .mini-heart.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.13) translate(var(--x), var(--y));
+    }
+    .float-anim-0 { animation: floatY 1.55s ease-in-out infinite;}
+    .float-anim-1 { animation: floatX 1.7s ease-in-out infinite;}
+    .float-anim-2 { animation: floatY 1.35s .27s ease-in-out infinite;}
+    .float-anim-3 { animation: floatX 1.8s .15s ease-in-out infinite;}
+    .float-anim-4 { animation: floatY 1.88s .41s ease-in-out infinite;}
+    .float-anim-5 { animation: floatX 1.5s .18s ease-in-out infinite;}
+    .float-anim-6 { animation: floatY 1.71s .29s ease-in-out infinite;}
+    .float-anim-7 { animation: floatX 1.66s .53s ease-in-out infinite;}
+    .float-anim-8 { animation: floatY 1.6s .34s ease-in-out infinite;}
+    .float-anim-9 { animation: floatX 1.7s .25s ease-in-out infinite;}
+    @keyframes floatY {
+      0%,100% { transform: translate(-50%, -50%) scale(1.13) translate(var(--x), var(--y)); }
+      50%     { transform: translate(-50%, -54%) scale(1.18) translate(var(--x), calc(var(--y) + 8px)); }
+    }
+    @keyframes floatX {
+      0%,100% { transform: translate(-50%, -50%) scale(1.13) translate(var(--x), var(--y)); }
+      50%     { transform: translate(-54%, -50%) scale(1.15) translate(calc(var(--x) + 9px), var(--y)); }
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #7ed8fd 0%, #f9a4d3 60%, #b69cff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      letter-spacing: 0.15em;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+  <div class="flex flex-col items-center justify-center relative" style="height:100vh;">
+    <div class="relative flex items-center justify-center" style="width:210px; height:210px;">
+      <div id="heart" class="cursor-pointer select-none z-10"
+        style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);">
+        <svg id="heartSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="120" height="120" style="display:block;">
+          <defs>
+            <linearGradient id="heart-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f9a4d3"/>
+              <stop offset="60%" stop-color="#7ed8fd"/>
+              <stop offset="100%" stop-color="#b69cff"/>
+            </linearGradient>
+          </defs>
+          <path id="heartPath"
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3
+              c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3
+              C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+            fill="none" stroke="#e8a0d7" stroke-width="1.2"/>
+        </svg>
+        <div id="miniHearts"></div>
+      </div>
+    </div>
+    <div id="welcome"
+      class="transition-all welcome-hide font-bold gradient-text select-none text-center mt-16 text-4xl sm:text-5xl uppercase">
+      WELCOME TO IT
+    </div>
+  </div>
+  <script>
+    const heart = document.getElementById('heart');
+    const heartPath = document.getElementById('heartPath');
+    const heartSvg = document.getElementById('heartSvg');
+    const welcome = document.getElementById('welcome');
+    const miniHearts = document.getElementById('miniHearts');
+    let filled = false;
+    const numMini = 10;
+    const r = 82;
+    const pastelColors = [
+      "#f9a4d3", "#b69cff", "#7ed8fd", "#fdceec", "#fdb6d0", "#bbf7fa", "#d1c4fd", "#fce7f3"
+    ];
+    function randomColor() {
+      return pastelColors[Math.floor(Math.random() * pastelColors.length)];
+    }
+    function createHeartsConfig() {
+      return Array.from({length: numMini}, (_, i) => {
+        const angle = (i / numMini) * (2 * Math.PI);
+        return {
+          x: Math.round(r * Math.cos(angle)),
+          y: Math.round(r * Math.sin(angle)),
+          color: randomColor()
+        };
+      });
+    }
+    function showMiniHearts() {
+      const heartsConfig = createHeartsConfig();
+      miniHearts.innerHTML = '';
+      heartsConfig.forEach((pos, i) => {
+        const el = document.createElement('div');
+        el.className = `mini-heart float-anim-${i % 10}`;
+        el.style.setProperty('--x', `${pos.x}px`);
+        el.style.setProperty('--y', `${pos.y}px`);
+        el.innerHTML = `
+          <svg width="25" height="25" viewBox="0 0 24 24" fill="${pos.color}">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3
+              c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3
+              C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        `;
+        miniHearts.appendChild(el);
+        setTimeout(() => el.classList.add('show'), 100 + 22*i);
+      });
+    }
+    function hideMiniHearts() {
+      document.querySelectorAll('.mini-heart').forEach((el, i) => {
+        el.classList.remove('show');
+      });
+      setTimeout(() => { miniHearts.innerHTML = ''; }, 500);
+    }
+    heart.addEventListener('click', () => {
+      if (!filled) {
+        heartPath.setAttribute("fill", "url(#heart-gradient)");
+        heartPath.setAttribute("stroke", "#fff");
+        heartSvg.classList.add('pop');
+        welcome.classList.remove('welcome-hide');
+        welcome.classList.add('welcome-show');
+        showMiniHearts();
+        filled = true;
+        setTimeout(() => heartSvg.classList.remove('pop'), 400);
+      } else {
+        heartPath.setAttribute("fill", "none");
+        heartPath.setAttribute("stroke", "#e8a0d7");
+        welcome.classList.add('welcome-hide');
+        welcome.classList.remove('welcome-show');
+        hideMiniHearts();
+        filled = false;
+      }
+    });
+  </script>
+</body>
+</html>
