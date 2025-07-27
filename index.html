@@ -1,59 +1,138 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome to it</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
+      font-family: 'Prompt', 'sans-serif';
       background: linear-gradient(135deg, #fdf6f7 0%, #e0f2fe 100%);
       min-height: 100vh;
     }
-    .transition-all { transition: all 0.45s cubic-bezier(.7,.25,.5,1.12);}
-    .welcome-hide { opacity: 0; transform: translateY(-24px); pointer-events: none;}
-    .welcome-show { opacity: 1; transform: translateY(0); pointer-events: auto;}
-    .pop { animation: pop-center 0.36s;}
-    @keyframes pop-center {
-      0% { transform: scale(1);}
-      60% { transform: scale(1.13);}
-      100% { transform: scale(1);}
+
+    .transition-all {
+      transition: all 0.45s cubic-bezier(.7, .25, .5, 1.12);
     }
+
+    .welcome-hide {
+      opacity: 0;
+      transform: translateY(-24px);
+      pointer-events: none;
+    }
+
+    .welcome-show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .pop {
+      animation: pop-center 0.36s;
+    }
+
+    @keyframes pop-center {
+      0% {
+        transform: scale(1);
+      }
+
+      60% {
+        transform: scale(1.13);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
     .mini-heart {
       position: absolute;
-      width: 25px; height: 25px;
-      left: 50%; top: 50%;
+      width: 25px;
+      height: 25px;
+      left: 50%;
+      top: 50%;
       transform: translate(-50%, -50%) scale(0.75);
       opacity: 0;
       z-index: 20;
       pointer-events: none;
-      filter: drop-shadow(0 2px 6px rgba(180,120,255,0.11));
+      filter: drop-shadow(0 2px 6px rgba(180, 120, 255, 0.11));
       transition:
-        opacity 0.38s cubic-bezier(.8,.2,.3,1),
-        transform 0.42s cubic-bezier(.8,.2,.3,1);
+        opacity 0.38s cubic-bezier(.8, .2, .3, 1),
+        transform 0.42s cubic-bezier(.8, .2, .3, 1);
     }
+
     .mini-heart.show {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1.13) translate(var(--x), var(--y));
     }
-    .float-anim-0 { animation: floatY 1.55s ease-in-out infinite;}
-    .float-anim-1 { animation: floatX 1.7s ease-in-out infinite;}
-    .float-anim-2 { animation: floatY 1.35s .27s ease-in-out infinite;}
-    .float-anim-3 { animation: floatX 1.8s .15s ease-in-out infinite;}
-    .float-anim-4 { animation: floatY 1.88s .41s ease-in-out infinite;}
-    .float-anim-5 { animation: floatX 1.5s .18s ease-in-out infinite;}
-    .float-anim-6 { animation: floatY 1.71s .29s ease-in-out infinite;}
-    .float-anim-7 { animation: floatX 1.66s .53s ease-in-out infinite;}
-    .float-anim-8 { animation: floatY 1.6s .34s ease-in-out infinite;}
-    .float-anim-9 { animation: floatX 1.7s .25s ease-in-out infinite;}
+
+    .float-anim-0 {
+      animation: floatY 1.55s ease-in-out infinite;
+    }
+
+    .float-anim-1 {
+      animation: floatX 1.7s ease-in-out infinite;
+    }
+
+    .float-anim-2 {
+      animation: floatY 1.35s .27s ease-in-out infinite;
+    }
+
+    .float-anim-3 {
+      animation: floatX 1.8s .15s ease-in-out infinite;
+    }
+
+    .float-anim-4 {
+      animation: floatY 1.88s .41s ease-in-out infinite;
+    }
+
+    .float-anim-5 {
+      animation: floatX 1.5s .18s ease-in-out infinite;
+    }
+
+    .float-anim-6 {
+      animation: floatY 1.71s .29s ease-in-out infinite;
+    }
+
+    .float-anim-7 {
+      animation: floatX 1.66s .53s ease-in-out infinite;
+    }
+
+    .float-anim-8 {
+      animation: floatY 1.6s .34s ease-in-out infinite;
+    }
+
+    .float-anim-9 {
+      animation: floatX 1.7s .25s ease-in-out infinite;
+    }
+
     @keyframes floatY {
-      0%,100% { transform: translate(-50%, -50%) scale(1.13) translate(var(--x), var(--y)); }
-      50%     { transform: translate(-50%, -54%) scale(1.18) translate(var(--x), calc(var(--y) + 8px)); }
+
+      0%,
+      100% {
+        transform: translate(-50%, -50%) scale(1.13) translate(var(--x), var(--y));
+      }
+
+      50% {
+        transform: translate(-50%, -54%) scale(1.18) translate(var(--x), calc(var(--y) + 8px));
+      }
     }
+
     @keyframes floatX {
-      0%,100% { transform: translate(-50%, -50%) scale(1.13) translate(var(--x), var(--y)); }
-      50%     { transform: translate(-54%, -50%) scale(1.15) translate(calc(var(--x) + 9px), var(--y)); }
+
+      0%,
+      100% {
+        transform: translate(-50%, -50%) scale(1.13) translate(var(--x), var(--y));
+      }
+
+      50% {
+        transform: translate(-54%, -50%) scale(1.15) translate(calc(var(--x) + 9px), var(--y));
+      }
     }
+
     .gradient-text {
       background: linear-gradient(90deg, #7ed8fd 0%, #f9a4d3 60%, #b69cff 100%);
       -webkit-background-clip: text;
@@ -62,26 +141,171 @@
       text-fill-color: transparent;
       letter-spacing: 0.15em;
     }
+
+    .gradient-icon {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+      margin-bottom: 5px;
+      width: 42px;
+      height: 42px;
+    }
+
+    .main-title {
+      font-size: 2.45rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-align: center;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #f9a4d3 0%, #7ed8fd 50%, #b69cff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      filter: drop-shadow(0 3px 12px #dbeafe65);
+      user-select: none;
+    }
+
+    .music-status {
+      margin-top: 24px;
+      font-size: 1.18rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #9d72b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 28px;
+      user-select: none;
+      transition: opacity 0.38s;
+      opacity: 1;
+    }
+
+    .music-status.hide {
+      opacity: 0;
+    }
+
+    .music-note {
+      font-size: 1.3em;
+      margin-right: 4px;
+      filter: drop-shadow(0 2px 6px #d6e6fa77);
+    }
+
+    .lyrics-area {
+      margin-top: 18px;
+      min-height: 38px;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #ab2b89;
+      letter-spacing: 0.08em;
+      opacity: 1;
+      transition: opacity 0.38s;
+      user-select: none;
+      line-height: 1.7;
+      position: relative;
+      min-height: 36px;
+      height: 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lyrics-line {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.7s, transform 0.7s;
+      font-size: 1.11em;
+      will-change: opacity, transform;
+      position: absolute;
+      width: 100%;
+      left: 0;
+    }
+
+    .lyrics-line.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .lyrics-line.out {
+      opacity: 0;
+      transform: translateY(-14px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .lyrics-area.hide {
+      opacity: 0;
+    }
+
+    @media (max-width: 480px) {
+      .main-title {
+        font-size: 1.3rem;
+      }
+
+      .gradient-icon {
+        width: 26px;
+        height: 26px;
+      }
+
+      .music-status {
+        font-size: 1.05rem;
+      }
+
+      .lyrics-area {
+        font-size: 1.12em;
+        min-height: 52px;
+        height: 56px;
+        margin-top: 10px;
+        width: 100%;
+      }
+
+      .lyrics-line {
+        font-size: 1.08em;
+      }
+
+      #welcome {
+        font-size: 2.05rem;
+        margin-top: 2.3rem;
+      }
+    }
   </style>
 </head>
+
 <body class="flex items-center justify-center min-h-screen">
+  <audio id="bgm" src="No One Else - ตอจากนเพลงรกทกเพลงจะเปนของเธอเทานน  (OFFICIAL MV).mp3" preload="auto"></audio>
   <div class="flex flex-col items-center justify-center relative" style="height:100vh;">
+    <div style="margin-bottom: 6px; margin-top: 8px;">
+      <span class="gradient-icon">
+        <svg viewBox="0 0 24 24" width="100%" height="100%">
+          <defs>
+            <linearGradient id="main-title-heart" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#7ed8fd" />
+              <stop offset="60%" stop-color="#f9a4d3" />
+              <stop offset="100%" stop-color="#b69cff" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+    </div>
     <div class="relative flex items-center justify-center" style="width:210px; height:210px;">
       <div id="heart" class="cursor-pointer select-none z-10"
         style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);">
-        <svg id="heartSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="120" height="120" style="display:block;">
+        <svg id="heartSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="120" height="120"
+          style="display:block;">
           <defs>
             <linearGradient id="heart-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#f9a4d3"/>
-              <stop offset="60%" stop-color="#7ed8fd"/>
-              <stop offset="100%" stop-color="#b69cff"/>
+              <stop offset="0%" stop-color="#f9a4d3" />
+              <stop offset="60%" stop-color="#7ed8fd" />
+              <stop offset="100%" stop-color="#b69cff" />
             </linearGradient>
           </defs>
-          <path id="heartPath"
-            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3
+          <path id="heartPath" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3
               c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3
-              C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-            fill="none" stroke="#e8a0d7" stroke-width="1.2"/>
+              C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="#e8a0d7"
+            stroke-width="1.2" />
         </svg>
         <div id="miniHearts"></div>
       </div>
@@ -90,6 +314,18 @@
       class="transition-all welcome-hide font-bold gradient-text select-none text-center mt-16 text-4xl sm:text-5xl uppercase">
       WELCOME TO IT
     </div>
+    <div id="musicStatus" class="music-status hide" style="flex-direction:column;align-items:center;">
+      <div>
+        <span class="music-note">🎵</span>
+        <span>เพลงกำลังเล่น...</span>
+      </div>
+      <div class="mt-1 w-full text-center">
+        <span class="text-[#7ed8fd] font-bold" style="font-size:0.7em;">
+          No One Else - ต่อจากนี้เพลงรักทุกเพลงจะเป็นของเธอเท่านั้น
+        </span>
+      </div>
+    </div>
+    <div id="lyrics" class="lyrics-area hide"></div>
   </div>
   <script>
     const heart = document.getElementById('heart');
@@ -97,17 +333,67 @@
     const heartSvg = document.getElementById('heartSvg');
     const welcome = document.getElementById('welcome');
     const miniHearts = document.getElementById('miniHearts');
+    const bgm = document.getElementById('bgm');
+    const musicStatus = document.getElementById('musicStatus');
+    const lyricsDiv = document.getElementById('lyrics');
     let filled = false;
     const numMini = 10;
     const r = 82;
     const pastelColors = [
       "#f9a4d3", "#b69cff", "#7ed8fd", "#fdceec", "#fdb6d0", "#bbf7fa", "#d1c4fd", "#fce7f3"
     ];
+    const lyrics = [
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่มีดอกไม้ใดที่เจอ",
+      "ที่จะสวยงาม ที่จะงดงาม เท่ารอยยิ้มของเธอ",
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่เคยมีคืนไหนที่ฉันจะแหงนมองดาวบนฟ้า",
+      "เพราะดวงตาของเธอนั้นสวยกว่า",
+      "- ดนตรี -",
+      "- ดนตรี -",
+      "ยังจำได้ดีวันแรกที่เราได้เจอกัน",
+      "เธอใส่ชุดขาวรีบเดินมาเพราะกลัวไม่ทัน",
+      "และก็ไม่รู้ตอนไหนหรือเกิดขึ้นเมื่อไร",
+      "รู้ตัวอีกทีก็ตอนที่รักทั้งหมดใจ",
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่มีดอกไม้ใดที่เจอ",
+      "ที่จะสวยงาม ที่จะงดงาม เท่ารอยยิ้มของเธอ",
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่เคยมีคืนไหนที่ฉันจะแหงนมองดาวบนฟ้า",
+      "เพราะดวงตาของเธอนั้นสวยกว่า ไม่เคยจะคิดว่ามันจะเกิดขึ้นกับฉัน",
+      "อยากขอบคุณเรื่องดีและร้ายที่ทำให้เราได้พบกัน",
+      "ต่อจากนี้เพลงรักทุกเพลงมันจะเป็นของเธอเท่านั้น เธอเท่านั้น เธอเท่านั้น เธอเท่านั้น",
+      "เธอเท่านั้น เธอเท่านั้น เธอเท่านั้น",
+      "- ดนตรี -",
+      "- ดนตรี -",
+      "- ดนตรี -",
+      "- ดนตรี -",
+      "ไม่เคยจะคิดว่ามันจะเกิดขึ้นกับฉัน",
+      "อยากขอบคุณเรื่องดีและร้ายที่ทำให้เราได้พบกัน",
+      "และต่อจากนี้เพลงรักทุกเพลงมันจะเป็นของเธอเท่านั้น",
+      "เธอเท่านั้น เธอเท่านั้น เธอเท่านั้น",
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่มีดอกไม้ใดที่เจอ ที่จะสวยงาม ที่จะงดงาม เท่ารอยยิ้มของเธอ",
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่เคยมีคืนไหนที่ฉันจะแหงนมองดาวบนฟ้า",
+      "เพราะดวงตาของเธอนั้นสวยกว่า",
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่มีดอกไม้ใดที่เจอ",
+      "ที่จะสวยงาม ที่จะงดงาม เท่ารอยยิ้มของเธอ",
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่เคยมีคืนไหนที่ฉันจะแหงนมองดาวบนฟ้า",
+      "เพราะดวงตาของเธอนั้นสวยกว่า",
+      "- ดนตรี -",
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่มีดอกไม้ใดที่เจอ",
+      "ที่จะสวยงาม ที่จะงดงาม เท่ารอยยิ้มของเธอ",
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่เคยมีคืนไหนที่ฉันจะแหงนมองดาวบนฟ้า",
+      "เพราะดวงตาของเธอนั้นสวยกว่า",
+      "- ดนตรี -",
+      "ยังจำได้ดีวันแรกที่เราได้เจอกัน",
+      "- ดนตรี -",
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่มีดอกไม้ใดที่เจอ",
+      "ที่จะสวยงาม ที่จะงดงาม เท่ารอยยิ้มของเธอ",
+      "ตั้งแต่วันที่ได้พบเธอก็ไม่เคยมีคืนไหนที่ฉันจะแหงนมองดาวบนฟ้า",
+      "เพราะดวงตาของเธอนั้นสวยกว่า",
+    ];
+
     function randomColor() {
       return pastelColors[Math.floor(Math.random() * pastelColors.length)];
     }
     function createHeartsConfig() {
-      return Array.from({length: numMini}, (_, i) => {
+      return Array.from({ length: numMini }, (_, i) => {
         const angle = (i / numMini) * (2 * Math.PI);
         return {
           x: Math.round(r * Math.cos(angle)),
@@ -132,7 +418,7 @@
           </svg>
         `;
         miniHearts.appendChild(el);
-        setTimeout(() => el.classList.add('show'), 100 + 22*i);
+        setTimeout(() => el.classList.add('show'), 100 + 22 * i);
       });
     }
     function hideMiniHearts() {
@@ -140,6 +426,38 @@
         el.classList.remove('show');
       });
       setTimeout(() => { miniHearts.innerHTML = ''; }, 500);
+    }
+    // เนื้อเพลงแต่ละบรรทัด Fade-in -> Fade-out ต่อกัน
+    let lyricsTimeout = null;
+    function showLyrics() {
+      lyricsDiv.classList.remove('hide');
+      lyricsDiv.innerHTML = '';
+      let i = 0;
+      function showLine(idx) {
+        if (idx >= lyrics.length) {
+          setTimeout(() => lyricsDiv.classList.add('hide'), 700);
+          return;
+        }
+        const line = document.createElement('div');
+        line.className = 'lyrics-line';
+        line.textContent = lyrics[idx];
+        lyricsDiv.appendChild(line);
+        setTimeout(() => line.classList.add('in'), 30);
+        lyricsTimeout = setTimeout(() => {
+          line.classList.remove('in');
+          line.classList.add('out');
+          setTimeout(() => {
+            lyricsDiv.removeChild(line);
+            showLine(idx + 1);
+          }, 700);
+        }, 5500);  // 4 วินาทีต่อบรรทัด
+      }
+      showLine(0);
+    }
+    function hideLyrics() {
+      if (lyricsTimeout) clearTimeout(lyricsTimeout);
+      lyricsDiv.classList.add('hide');
+      setTimeout(() => { lyricsDiv.innerHTML = ''; }, 380);
     }
     heart.addEventListener('click', () => {
       if (!filled) {
@@ -149,6 +467,12 @@
         welcome.classList.remove('welcome-hide');
         welcome.classList.add('welcome-show');
         showMiniHearts();
+        musicStatus.classList.remove('hide');
+        showLyrics();
+        if (bgm) {
+          bgm.currentTime = 5; // เริ่มเล่นที่วินาทีที่ 5
+          bgm.play().catch(() => { });
+        }
         filled = true;
         setTimeout(() => heartSvg.classList.remove('pop'), 400);
       } else {
@@ -157,9 +481,16 @@
         welcome.classList.add('welcome-hide');
         welcome.classList.remove('welcome-show');
         hideMiniHearts();
+        musicStatus.classList.add('hide');
+        hideLyrics();
+        if (bgm) {
+          bgm.pause();
+          bgm.currentTime = 0;
+        }
         filled = false;
       }
     });
   </script>
 </body>
+
 </html>
